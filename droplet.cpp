@@ -1,70 +1,86 @@
 #include "droplet.h"
 
+
+//The difference in value between the dark and light colours is 8
+#define colourOffset 8
+
 Droplet::Droplet() {
-	pos = 0;
-	lineLength = 0;
-	charColour = 0;
 	numSet.resize(0);
 }
 
-Droplet::Droplet(int p) {
+Droplet::Droplet(const int p) {
 	dropletCount++;
 	pos = p;
 	charColour = 2;
 
-	static std::default_random_engine e;
-	static std::uniform_int_distribution <int> u(0, 20);
-	numSet.resize(u(e));
-	lineLength = numSet.size();
-
-	for (auto& n : numSet) {
-		n = u(e) % 9;
-	}
-	lineLength--;
+	setCharset();
 }
 
-Droplet::Droplet(int p, int c) {
+Droplet::Droplet(const int p, const int c) {
 	dropletCount++;
 	pos = p;
 	charColour = c;
 
-	static std::default_random_engine e;
-	static std::uniform_int_distribution <int> u(0, 20);
-	numSet.resize(u(e));
-	lineLength = numSet.size();
+	setCharset();
+}
 
-	for (auto& n : numSet) {
-		n = u(e) % 9;
-	}
-	lineLength--;
+Droplet::Droplet(const Droplet& d) {
+	dropletCount++;
+	pos = d.pos;
+	charColour = d.charColour;
+
+	setCharset();
 }
 
 Droplet::~Droplet() {
 	dropletCount--;
 }
 
-int Droplet::getDropletCount() {
-	return dropletCount;
+void Droplet::printDroplet() {
+	if (lineLength - currentLength <= 2) {
+		SetConsoleTextAttribute(consoleHandle, charColour);
+	}
+	else {
+		SetConsoleTextAttribute(consoleHandle, charColour + colourOffset);
+	}
+
+	std::cout << numSet.at(currentLength);
+
+	currentLength--;
 }
 
-void Droplet::getDroplet() {
-	SetConsoleTextAttribute(consoleHandle, colourSet.at(charColour));
-
-	int num = numSet.at(lineLength);
-	std::cout << num;
-
-	pos++;
-	lineLength--;
-}
-
-int Droplet::getLineLength() {
-	return lineLength;
+int Droplet::getCurrentLength() {
+	return currentLength;
 }
 
 int Droplet::getPos() {
 	return pos;
 }
 
+int Droplet::getColour() {
+	return charColour;
+}
 
+int Droplet::getDropletCount() {
+	return dropletCount;
+}
 
+void Droplet::setColour(const int c) {
+	charColour = c;
+}
 
+void Droplet::setPos(const int p) {
+	pos = p;
+}
+
+void Droplet::setCharset() {
+	static std::default_random_engine e;
+	static std::uniform_int_distribution <int> u(5, 30);
+	numSet.resize(u(e));
+	lineLength = numSet.size() - 1;
+	currentLength = lineLength;
+
+	for (auto& n : numSet) {
+		n = u(e) % 9;
+	}
+}

@@ -6,7 +6,7 @@ int main() {
 
 	static std::default_random_engine engine;
 	static std::uniform_int_distribution <int> position(0, 99);
-	static std::uniform_int_distribution <int> colour(0, 5);
+	static std::uniform_int_distribution <int> colour(1, 5);
 
 	int newPosition = 0;
 	int newColour = 0;
@@ -17,7 +17,7 @@ int main() {
 		newColour = colour(engine);
 		for (auto& d : rain) {
 			if (d.getPos() == newPosition) {
-				if (d.getLineLength() > 0) {
+				if (d.getCurrentLength() > 0) {
 					containsDroplet = true;
 					break;
 				}
@@ -29,8 +29,8 @@ int main() {
 		}
 
 		for (auto& d : rain) {
-			if (d.getLineLength() > 0) {
-				d.getDroplet();
+			if (d.getCurrentLength() > 0) {
+				d.printDroplet();
 			}
 			else {
 				std::cout << " ";
