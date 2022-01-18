@@ -1,6 +1,17 @@
 #include "droplet.h"
 
+/*
+Josua Brink
+Digital Rain
+*/
+void digitalRain();
+
 int main() {
+	digitalRain();
+	return 0;
+}
+
+void digitalRain() {
 	std::vector<Droplet> rain;
 	rain.resize(100);
 
@@ -12,7 +23,7 @@ int main() {
 	int newColour = 0;
 	bool containsDroplet = false;
 
-	while(true) {
+	while (true) {
 		newPosition = position(engine);
 		newColour = colour(engine);
 		for (auto& d : rain) {
@@ -40,6 +51,5 @@ int main() {
 		std::cout << std::endl;
 		Sleep(10);
 	}
-
-	return 0;
 }
+
