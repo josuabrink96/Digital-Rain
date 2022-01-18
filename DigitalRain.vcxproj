@@ -141,9 +141,11 @@
   <ItemGroup>
     <ClCompile Include="droplet.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="rain.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="droplet.h" />
+    <ClInclude Include="rain.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

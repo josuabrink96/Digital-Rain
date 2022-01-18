@@ -1,5 +1,9 @@
-#include "droplet.h"
+/*
+Josua Brink
+Digital Rain
+*/
 
+#include "droplet.h"
 
 //The difference in value between the dark and light colours is 8
 #define colourOffset 8
