@@ -1,3 +1,9 @@
+/*
+Josua Brink
+Digital Rain
+*/
+
+
 #ifndef DROPLET_H
 #define DROPLET_H
 
